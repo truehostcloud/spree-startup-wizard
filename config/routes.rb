@@ -1,3 +1,5 @@
-Spree::Core::Engine.add_routes do
-  # Add your extension routes here
+Spree::Core::Engine.routes.draw do
+  namespace :admin do
+    get 'startup_wizard',  controller: 'startup_wizard', action: "index"
+  end
 end
