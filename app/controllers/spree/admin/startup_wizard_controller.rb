@@ -1,5 +1,9 @@
-class Spree::Admin::StartupWizardController < Spree::Admin::BaseController
-  def index
-    @store = Spree::Store.default
+module Spree
+  module Admin
+    class StartupWizardController < Spree::Admin::BaseController
+      def index
+        @store = Spree::Store.default
+      end
+    end
   end
 end

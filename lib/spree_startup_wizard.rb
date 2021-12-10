@@ -1,4 +1,6 @@
 require 'spree_core'
-require 'spree_extension'
+require 'spree_backend'
+require 'deface'
 require 'spree_startup_wizard/engine'
 require 'spree_startup_wizard/version'
+require 'spree_extension'
