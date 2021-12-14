@@ -3,6 +3,13 @@ module SpreeStartupWizard
     class InstallGenerator < Rails::Generators::Base
       class_option :migrate, type: :boolean, default: true
 
+      def install
+        Dir.chdir(Gem.loaded_specs['spree_startup_wizard'].full_gem_path) do
+          run 'yarn install'
+          run 'yarn build'
+        end
+      end
+
       def add_migrations
         run 'bundle exec rake railties:install:migrations FROM=spree_startup_wizard'
       end
