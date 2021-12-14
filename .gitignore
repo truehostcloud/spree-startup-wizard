@@ -22,5 +22,6 @@ public/spree
 *.gem
 */*.gem
 node_modules
-app/assets/javascript/spree/admin/startup_wizard.js
+app/assets/javascript
+app/assets/stylesheets
 .vscode
