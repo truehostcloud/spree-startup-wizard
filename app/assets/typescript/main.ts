@@ -1,1 +1,1 @@
-console.log('FROM TS')
+import '../scss/main.scss'

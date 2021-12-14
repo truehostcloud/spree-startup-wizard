@@ -1,5 +1,15 @@
 import path from 'path'
 import typescript from '@rollup/plugin-typescript'
+import scss from 'rollup-plugin-scss'
+import postcss from 'postcss'
+import autoprefixer from 'autoprefixer'
+
+/**
+ * @returns {boolean}
+ */
+const isDevelopment = () => {
+  return process.env.NODE_ENV === 'development'
+}
 
 /** @type { import('rollup').RollupOptions } */
 const config = {
@@ -11,7 +21,15 @@ const config = {
     ),
     format: 'iife'
   },
-  plugins: [typescript()]
+  plugins: [
+    typescript(),
+    scss({
+      processor: () => postcss([autoprefixer()]),
+      output: 'app/assets/stylesheets/spree/admin/startup_wizard.css',
+      sourceMap: isDevelopment(),
+      watch: path.resolve(__dirname, 'app/assets/scss')
+    })
+  ]
 }
 
 export default config
