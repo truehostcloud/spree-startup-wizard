@@ -3,6 +3,7 @@ import typescript from '@rollup/plugin-typescript'
 import scss from 'rollup-plugin-scss'
 import postcss from 'postcss'
 import autoprefixer from 'autoprefixer'
+import livereload from 'rollup-plugin-livereload'
 
 /**
  * @returns {boolean}
@@ -28,7 +29,8 @@ const config = {
       output: 'app/assets/stylesheets/spree/admin/startup_wizard.css',
       sourceMap: isDevelopment(),
       watch: path.resolve(__dirname, 'app/assets/scss')
-    })
+    }),
+    isDevelopment() && livereload()
   ]
 }
 
