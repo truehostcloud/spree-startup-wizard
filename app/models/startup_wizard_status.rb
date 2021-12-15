@@ -1,0 +1,2 @@
+class StartupWizardStatus < ApplicationRecord
+end
