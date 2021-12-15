@@ -1,5 +1,6 @@
 import path from 'path'
 import typescript from '@rollup/plugin-typescript'
+import nodeResolve from '@rollup/plugin-node-resolve'
 import scss from 'rollup-plugin-scss'
 import postcss from 'postcss'
 import autoprefixer from 'autoprefixer'
@@ -23,6 +24,7 @@ const config = {
     format: 'iife'
   },
   plugins: [
+    nodeResolve(),
     typescript(),
     scss({
       processor: () => postcss([autoprefixer()]),
