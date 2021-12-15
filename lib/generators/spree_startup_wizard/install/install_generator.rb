@@ -22,6 +22,10 @@ module SpreeStartupWizard
           puts 'Skipping rails db:migrate, don\'t forget to run it!'
         end
       end
+
+      def seed_table
+        Rake::Task['wizard:db:seed'].invoke
+      end
     end
   end
 end
