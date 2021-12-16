@@ -2,7 +2,7 @@ module Spree
   module Admin
     class StartupWizardController < Spree::Admin::BaseController
       def index
-        @store = Spree::Store.default
+        @checklist = StartupWizardChecklist.order(order: :asc)
       end
     end
   end
