@@ -1,0 +1,7 @@
+// https://github.com/twbs/bootstrap/blob/043a03c95a2ad6738f85b65e53b9dbdfb03b8d10/scss/_root.scss#L3
+
+:root {
+  @each $color, $value in $grays {
+    --#{$color}: #{$value};
+  }
+}

@@ -1,3 +1,4 @@
-h1 {
-  color: red;
-}
+@import './functions';
+@import './variables';
+@import './root';
+@import './components';
