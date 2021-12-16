@@ -21,6 +21,7 @@ const config = {
       __dirname,
       'app/assets/javascript/spree/admin/startup_wizard.js'
     ),
+    sourcemap: true,
     format: 'iife'
   },
   plugins: [
