@@ -1,5 +1,6 @@
 {
   "name": "@spree/startup-wizard",
+  "main": "app/assets/javascript/spree/admin/startup_wizard.js",
   "scripts": {
     "clean": "rimraf app/assets/javascript && rimraf app/assets/stylesheets",
     "predev": "npm run clean",
