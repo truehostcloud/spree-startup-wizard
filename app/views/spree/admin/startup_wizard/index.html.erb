@@ -1,39 +1,43 @@
 <%= stylesheet_link_tag 'spree/admin/startup_wizard', media: :all %>
 
 <div class="card" style="width: 100%;">
+
   <div class="card-header wizard__header">
     <div class="flex-grow-1 d-flex align-items-center">
       <span class="wizard__title">Get ready for your first sale. Follow our tips to get started.</span>
     </div>
     <div class="flex-shrink-1">
       <div class="wizard__progress d-flex flex-column align-items-center">
-        <span class="wizard__percent">33%</span>
+        <span class="wizard__percent"><%=@progress%>%</span>
         <div>
-          <input type="range" name="" min="0" max="100" value="33" disabled>
+          <input type="range" name="" min="0" max="100" value="<%=@progress%>" disabled>
         </div>
       </div>
     </div>
   </div>
 
-  <%= form_with do |f| %>
+  <%= form_with id: "startup-wizard", url: "/admin/startup_wizard/toggle" do |f| %>
     <ul data-controller="step" class="list-group list-group-flush">
       <% @checklist.each do |item| %>
-         <li type="button" class="list-group-item wizard__checklist wizard__checklist--done">
-            <div>
-                <span class="shadow rounded-circle wizard__check wizard__check--active">
-                  <%= svg_icon name: "tick.svg", width: '20', height: '20' %>
-                </span>
-            </div>
-            <div class="wizard__labels">
-                <div class="label"><%= item.label%></div>
-                <div class="description"><%= item.description%></div>
-            </div>
-            <div class="d-flex justify-content-center align-items-center">
-                <span class="wizard__arrow">
-                  <%= svg_icon name: "arrow-right.svg", width: '25', height: '25' %>
-                </span>
-            </div>
-         </li>
+          <li type="button" class="list-group-item wizard__checklist <% if item.status %> wizard__checklist--done <% end %>">
+            <%= f.hidden_field 'checklist[CHECKLIST_ID]'.gsub('CHECKLIST_ID',item.id.to_s), value: item.status %>
+              <div class="wizard__head d-flex justify-content-center align-items-center">
+                  <button type="submit" class="shadow rounded-circle wizard__check">
+                    <%= svg_icon name: "tick.svg", width: '20', height: '20' %>
+                  </button>
+              </div>
+              <% if item.url %> <a class="wizard__body" href="<%=item.url.gsub('STORE_ID', @store.id.to_s)%>"> <% else %> <div class="wizard__body"> <% end %>
+                  <div class="wizard__labels">
+                      <div class="label"><%= item.label%></div>
+                      <div class="description"><%= item.description%></div>
+                  </div>
+                  <div class="d-flex justify-content-center align-items-center">
+                      <span class="wizard__arrow">
+                        <%= svg_icon name: "arrow-right.svg", width: '25', height: '25' %>
+                      </span>
+                  </div>
+              <% if item.url %> </a> <% else %> </div> <% end %>
+          </li>
       <% end %>
     </ul>
   <% end %>

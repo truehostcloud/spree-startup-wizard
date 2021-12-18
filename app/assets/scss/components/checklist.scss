@@ -2,10 +2,7 @@
   position: relative;
   display: flex;
   background-color: white;
-
-  & > div {
-    width: 4rem;
-  }
+  gap: 2rem;
 
   &:hover {
     background-color: var(--gray-300);
@@ -49,12 +46,28 @@
       .label {
         font-size: 1.125rem;
         line-height: 1.75rem;
+        color: var(--dark);
       }
 
       .description {
         font-size: 1rem;
         line-height: 1.5rem;
         color: var(--gray-600);
+      }
+    }
+
+    &__head {
+      width: 4rem;
+    }
+
+    &__body {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+
+      &:hover {
+        text-decoration: none;
       }
     }
   }
