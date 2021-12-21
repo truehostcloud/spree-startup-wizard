@@ -24,7 +24,7 @@ module SpreeStartupWizard
       end
 
       def seed_table
-        Rake::Task['wizard:db:seed'].invoke
+        rake 'wizard:db:seed'
       end
     end
   end
