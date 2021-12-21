@@ -54,6 +54,8 @@ module Spree
 
       def progress
         total = StartupWizardChecklist.all.count
+        return 0 if total.zero?
+
         done = StartupWizardStatus.where(store_id: @store.id, done: true).count
         (done / total) * 100
       end
