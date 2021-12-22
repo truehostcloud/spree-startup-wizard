@@ -16,13 +16,13 @@
     </div>
   </div>
 
-  <%= form_with id: "startup-wizard", url: "/admin/startup_wizard/toggle" do |f| %>
-    <ul data-controller="step" class="list-group list-group-flush">
+  <%= form_with id: "startup-wizard", url: "/admin/startup_wizard/toggle", :html => {'data-controller': 'checklist-form', 'data-action': 'checklist:submit->checklist-form#onSubmit'} do |f| %>
+    <ul class="list-group list-group-flush">
       <% @checklist.each do |item| %>
-          <li type="button" class="list-group-item wizard__checklist <% if item.status %> wizard__checklist--done <% end %>">
-            <%= f.hidden_field 'checklist[CHECKLIST_ID]'.gsub('CHECKLIST_ID',item.id.to_s), value: item.status %>
+          <li type="button" class="list-group-item wizard__checklist <% if item.status %> wizard__checklist--done<% end %>" data-controller="checklist">
+            <%= f.hidden_field 'checklist[CHECKLIST_ID]'.gsub('CHECKLIST_ID', item.id.to_s), value: item.status, "data-checklist-target": "input" %>
               <div class="wizard__head d-flex justify-content-center align-items-center">
-                  <button type="submit" class="shadow rounded-circle wizard__check">
+                  <button data-action="click->checklist#onToggle" class="shadow rounded-circle wizard__check">
                     <%= svg_icon name: "tick.svg", width: '20', height: '20' %>
                   </button>
               </div>
