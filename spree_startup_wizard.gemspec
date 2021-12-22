@@ -13,14 +13,14 @@ Gem::Specification.new do |s|
 
   s.author    = ['Collins Lagat', 'Ryanada Ltd']
   s.email     = ['info@olitt.com']
-  s.homepage  = 'https://github.com/your-github-handle/spree_startup_wizard'
+  s.homepage  = 'https://github.com/truehostcloud/spree-startup-wizard'
   s.license = 'BSD-3-Clause'
 
   s.files = `git ls-files`.split("\n").reject { |f| f.match(/^spec/) && !f.match(%r{^spec/fixtures}) }
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  spree_version = '>= 4.4.0.rc1'
+  spree_version = '>= 4.3.0'
   s.add_dependency 'spree', spree_version
   s.add_dependency 'spree_backend', spree_version
   s.add_dependency 'spree_extension'
