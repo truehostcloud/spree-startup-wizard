@@ -80,5 +80,12 @@
       background-color: var(--green);
       color: white;
     }
+
+    &__labels {
+      .label,
+      .description {
+        text-decoration: line-through;
+      }
+    }
   }
 }
