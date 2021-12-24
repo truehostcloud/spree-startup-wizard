@@ -1,6 +1,6 @@
 class CreateStartupWizardStatuses < ActiveRecord::Migration[6.1]
   def change
-    create_table :startup_wizard_statuses do |t|
+    create_table :startup_wizard_statuses, if_not_exists: true do |t|
       t.bigint :checklist_id, null: false
       t.bigint :store_id, null: false
       t.boolean :done, null: false, default: false
