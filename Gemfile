@@ -4,6 +4,7 @@ gem 'deface'
 spree_opts = '>= 4.4.0.rc1'
 gem 'spree', spree_opts
 gem 'spree_backend', spree_opts
+gem 'spree_multi_vendor'
 
 group :test do
   gem 'rails-controller-testing'

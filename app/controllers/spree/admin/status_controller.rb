@@ -1,11 +1,19 @@
 module Spree
   module Admin
-    class StartupWizardController < Spree::Admin::BaseController
+    class StatusController < Spree::Admin::BaseController
+      before_action :authorize
+
       def index
-        @checklist = StartupWizardChecklist.order(order: :asc)
+        @checklist = SpreeStartupWizard::Checklist.order(order: :asc)
         @store = Spree::Store.current
-        @statuses = StartupWizardStatus.where(store_id: @store.id)
+        @statuses = SpreeStartupWizard::Status.where(store_id: @store.id)
         @progress = progress
+      end
+
+      def authorize_admin; end
+
+      def authorize
+        authorize! :manage, :startup_wizard_statuses
       end
 
       def toggle
@@ -15,10 +23,10 @@ module Spree
         ActiveRecord::Base.transaction do
           permitted_resource_params.each do |checklist_id, status|
             begin
-              @status = StartupWizardStatus.find_by(checklist_id: checklist_id, store_id: @store.id)
+              @status = SpreeStartupWizard::Status.find_by(checklist_id: checklist_id, store_id: @store.id)
               raise ActiveRecord::RecordNotFound if @status.nil?
             rescue ActiveRecord::RecordNotFound
-              @status = StartupWizardStatus.new(checklist_id: checklist_id, store_id: @store.id, done: false)
+              @status = SpreeStartupWizard::Status.new(checklist_id: checklist_id, store_id: @store.id, done: false)
               @errors << @status.errors unless @status.save
             end
             @errors << @status.errors unless @status.update(done: status)
@@ -53,10 +61,10 @@ module Spree
       end
 
       def progress
-        total = StartupWizardChecklist.all.count
+        total = SpreeStartupWizard::Checklist.all.count
         return 0 if total.zero?
 
-        done = StartupWizardStatus.where(store_id: @store.id, done: true).count
+        done = SpreeStartupWizard::Status.where(store_id: @store.id, done: true).count
         (done / total) * 100
       end
     end
