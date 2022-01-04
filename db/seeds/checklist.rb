@@ -40,14 +40,14 @@ class PreloadedChecklist
   ].freeze
 
   def call
-    if StartupWizardChecklist.count(:all) == CHECKLISTS.length
+    if SpreeStartupWizard::Checklist.count(:all) == CHECKLISTS.length
       puts 'Checklist is already populated. Consider deleteing if you want to seed again.'
       return
     end
 
     ActiveRecord::Base.transaction do
       models = CHECKLISTS.map do |item|
-        StartupWizardChecklist.new item
+        SpreeStartupWizard::Checklist.new item
       end
       models.each(&:save)
     end
